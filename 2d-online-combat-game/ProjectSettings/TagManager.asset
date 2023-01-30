@@ -38,6 +38,27 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: ' Background'
+    uniqueID: 3806339585
+    locked: 0
+  - name: Clouds
+    uniqueID: 1740056053
+    locked: 0
+  - name: Sea
+    uniqueID: 2803364719
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Caves
+    uniqueID: 1288639201
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1403168689
+    locked: 0
+  - name: Entity
+    uniqueID: 1992900343
+    locked: 0
+  - name: Terrain
+    uniqueID: 1005854597
     locked: 0
