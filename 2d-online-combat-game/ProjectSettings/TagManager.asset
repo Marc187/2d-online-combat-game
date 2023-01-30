@@ -50,11 +50,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Caves
-    uniqueID: 1288639201
-    locked: 0
   - name: Obstacles
     uniqueID: 1403168689
+    locked: 0
+  - name: Caves
+    uniqueID: 1288639201
     locked: 0
   - name: Entity
     uniqueID: 1992900343
