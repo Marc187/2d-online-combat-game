@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
 
-public class PrototypeHeroDemo : MonoBehaviour {
+public class PrototypeHeroDemo : NetworkBehaviour {
 
     [Header("Variables")]
     [SerializeField] float      m_maxSpeed = 4.5f;
@@ -34,7 +35,9 @@ public class PrototypeHeroDemo : MonoBehaviour {
 
     // Update is called once per frame
     void Update ()
-    {
+    {   
+        if (!IsOwner) return;
+
         // Decrease timer that disables input movement. Used when attacking
         m_disableMovementTimer -= Time.deltaTime;
 
