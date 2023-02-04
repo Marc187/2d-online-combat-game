@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
 
-public class PrototypeHero : MonoBehaviour {
+public class PrototypeHero : NetworkBehaviour {
 
     public float      m_runSpeed = 4.5f;
     public float      m_walkSpeed = 2.0f;
@@ -55,7 +56,9 @@ public class PrototypeHero : MonoBehaviour {
 
     // Update is called once per frame
     void Update ()
-    {
+    {   
+        if (!IsOwner) return;
+
         // Decrease death respawn timer 
         m_respawnTimer -= Time.deltaTime;
 
