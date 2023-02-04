@@ -6899,7 +6899,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &932709410
 GameObject:
@@ -14187,7 +14187,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4699199415772779552, guid: 8256f17f1004efd40b46f598cabec2ea, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4699199415772779552, guid: 8256f17f1004efd40b46f598cabec2ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47768,10 +47768,10 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 2048025570}
-    PlayerPrefab: {fileID: 5126507520524490402, guid: e481822248898d04e9808a3d3ca78e5a, type: 3}
+    PlayerPrefab: {fileID: 5126507520524490402, guid: cb8a35bd229983f4d9362e55edb16b26, type: 3}
     NetworkPrefabs:
     - Override: 0
-      Prefab: {fileID: 5126507520524490402, guid: e481822248898d04e9808a3d3ca78e5a, type: 3}
+      Prefab: {fileID: 5126507520524490402, guid: cb8a35bd229983f4d9362e55edb16b26, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
