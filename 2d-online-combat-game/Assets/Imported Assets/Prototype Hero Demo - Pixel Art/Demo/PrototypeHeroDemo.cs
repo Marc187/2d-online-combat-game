@@ -22,6 +22,7 @@ public class PrototypeHeroDemo : NetworkBehaviour {
     private bool                m_moving = false;
     private int                 m_facingDirection = 1;
     private float               m_disableMovementTimer = 0.0f;
+    private CameraFollow cam;
 
     // Use this for initialization
     void Start ()
@@ -31,6 +32,10 @@ public class PrototypeHeroDemo : NetworkBehaviour {
         m_audioSource = GetComponent<AudioSource>();
         m_audioManager = AudioManager_PrototypeHero.instance;
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
+
+        // Defines camera target as this instance of the player prefab
+        Debug.Log(this.transform);
+        //cam.target = GetComponent<Transform>;
     }
 
     // Update is called once per frame

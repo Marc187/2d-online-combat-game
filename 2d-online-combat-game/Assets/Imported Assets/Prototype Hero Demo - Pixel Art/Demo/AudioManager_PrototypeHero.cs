@@ -14,6 +14,7 @@ public class Sound
     public float pitch = 1.0f;
     public Vector2 m_randomVolumeRange = new Vector2(1.0f, 1.0f);
     public Vector2 m_randomPitchRange = new Vector2(1.0f, 1.0f);
+    public bool m_loop = false;
 
     private AudioSource m_source;
 
@@ -22,6 +23,7 @@ public class Sound
         m_source = source;
         int randomClip = Random.Range(0, m_clips.Length - 1);
         m_source.clip = m_clips[randomClip];
+        m_source.loop = m_loop;
     }
 
     public void Play()
@@ -34,6 +36,19 @@ public class Sound
         m_source.volume = volume * Random.Range(m_randomVolumeRange.x, m_randomVolumeRange.y);
         m_source.pitch = pitch * Random.Range(m_randomPitchRange.x, m_randomPitchRange.y);
         m_source.Play();
+    }
+
+    public void Stop()
+    {
+        m_source.Stop();
+    }
+
+    public bool IsPlaying()
+    {
+        if (m_source.isPlaying)
+            return true;
+        else
+            return false;
     }
 }
 
@@ -79,5 +94,30 @@ public class AudioManager_PrototypeHero : MonoBehaviour
         }
 
         Debug.LogWarning("AudioManager: Sound name not found in list: " + name);
+    }
+
+    public void StopSound(string name)
+    {
+        for (int i = 0; i < m_sounds.Length; i++)
+        {
+            if (m_sounds[i].m_name == name && m_sounds[i].IsPlaying())
+            {
+                m_sounds[i].Stop();
+                return;
+            }
+        }
+    }
+
+    public bool IsPlaying(string name)
+    {
+        for (int i = 0; i < m_sounds.Length; i++)
+        {
+            if (m_sounds[i].m_name == name && m_sounds[i].IsPlaying())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
