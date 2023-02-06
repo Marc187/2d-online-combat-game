@@ -6719,7 +6719,7 @@ GameObject:
   - component: {fileID: 176943422}
   - component: {fileID: 176943425}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6800,12 +6800,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 176943421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61d612f090947154dbd82b29ad1543a3, type: 3}
+  m_Script: {fileID: 11500000, guid: b8e907cdfe96016469361f8a691acb0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowSpeed: 2
-  yOffSet: 1
-  target: {fileID: 0}
+  targets: []
+  offset: {x: 0, y: 0, z: 0}
+  smoothTime: 0.5
+  minZoom: 40
+  maxZoom: 10
+  zoomLimiter: 50
 --- !u!1 &530427401
 GameObject:
   m_ObjectHideFlags: 0
@@ -6909,9 +6912,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825475421}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7361252, y: -0.39399904, z: -0.100814626}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
