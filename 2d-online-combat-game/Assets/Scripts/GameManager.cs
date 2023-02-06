@@ -15,6 +15,8 @@ using Unity.Netcode.Transports.UTP;
 
 public class GameManager : MonoBehaviour
 {
+    private Camera mainCamera;
+
     // Singleton
     public static GameManager _instance;
     public static GameManager Instance => _instance;
@@ -46,6 +48,8 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
+        mainCamera = Camera.main;
+
         // Initialize unity services
         await UnityServices.InitializeAsync();
 
@@ -69,6 +73,10 @@ public class GameManager : MonoBehaviour
 
         UpdateState?.Invoke("Player found!");
         MatchFound?.Invoke();
+
+        // Updates current users list
+        var cam = mainCamera.GetComponent<MultipleTargetCamera>();
+        cam.UpdateTargetList();
     }
 
     #endregion
