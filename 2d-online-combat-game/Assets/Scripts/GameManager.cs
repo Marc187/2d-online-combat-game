@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private RelayHostData _hostData;
     private RelayJoinData _joinData;
 
-
+    public Timer timer;
     // Setup events 
 
     // Notify state update
@@ -70,13 +70,18 @@ public class GameManager : MonoBehaviour
         // Player with id connected to our session
 
         Debug.Log("Connected player with id: " + id);
-
         UpdateState?.Invoke("Player found!");
         MatchFound?.Invoke();
 
         // Updates current users list
         var cam = mainCamera.GetComponent<MultipleTargetCamera>();
         cam.UpdateTargetList();
+
+        // CHeck if users list is equal to 2
+        if (cam.targets.Count == 2)
+        {
+            timer.timerIsRunning = true;
+        }
     }
 
     #endregion
@@ -273,6 +278,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region NetworkStructs
     /// <summary>
     /// RelayHostData represents the necessary informations
     /// for a Host to host a game on a Relay
@@ -303,4 +309,5 @@ public class GameManager : MonoBehaviour
         public byte[] HostConnectionData;
         public byte[] Key;
     }
+    #endregion
 }
