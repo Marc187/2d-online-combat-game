@@ -166,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 5126507520524490402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4096299932219503466}
@@ -189,14 +189,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60f39d280f172e44ab73cb24a06b940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_runSpeed: 4.5
-  m_walkSpeed: 2
-  m_jumpForce: 7.5
+  m_runSpeed: 10
+  m_walkSpeed: 5
+  m_jumpForce: 136.4
   m_dodgeForce: 8
   m_parryKnockbackForce: 4
   m_noBlood: 0
-  m_hideSword: 0
-  m_maxSpeed: 4.5
+  m_hideSword: 1
+  m_maxSpeed: 10
 --- !u!50 &7853426713638563735
 Rigidbody2D:
   serializedVersion: 4
@@ -298,7 +298,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &246681172068669637
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -315,7 +315,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8413161123730670649
 MonoBehaviour:
   m_ObjectHideFlags: 0
