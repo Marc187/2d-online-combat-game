@@ -18,6 +18,12 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
     private PrototypeHero       m_player;
     private AudioManager_PrototypeHero m_audioManager;
 
+    public Transform attackPoint;
+    public Transform attackPoint2;
+    public float attackRange = 0.5f;
+    public float attackRange2 = 0.5f;
+    public LayerMask enemyLayers;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -120,6 +126,31 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
     void AE_SwordAttack()
     {
         m_audioManager.PlaySound("SwordAttack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies2 = Physics2D.OverlapCircleAll(attackPoint2.position, attackRange2, enemyLayers);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("We hit the enemy" + enemy.name);
+        }
+
+        foreach (Collider2D enemy in hitEnemies2)
+        {
+            Debug.Log("We hit the enemy" + enemy.name);
+        }
+        
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        if (attackPoint2 == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
     void AE_SheathSword()

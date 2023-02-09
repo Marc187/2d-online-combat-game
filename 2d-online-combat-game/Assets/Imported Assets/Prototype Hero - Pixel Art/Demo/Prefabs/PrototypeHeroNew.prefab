@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &41028868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 41028869}
+  m_Layer: 6
+  m_Name: Attackpoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &41028869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41028868}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.67, y: -0.39, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7216317338779392757}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254912165905175345
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +42,7 @@ GameObject:
   - component: {fileID: 4096299932219503466}
   - component: {fileID: 4210655474100147033}
   - component: {fileID: 5692587709083937071}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,6 +102,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1e2b6d84e999947b05639de34780d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1860531561230240505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7599130454112813190}
+  m_Layer: 6
+  m_Name: Attackpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7599130454112813190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860531561230240505}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.65, y: -0.382, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7216317338779392757}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4860009054595029925
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +144,7 @@ GameObject:
   - component: {fileID: 7234416123028626362}
   - component: {fileID: 3502039444196788052}
   - component: {fileID: 6131596185185708868}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallSensor_R2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +212,7 @@ GameObject:
   - component: {fileID: -1442058435570403}
   - component: {fileID: -2552788240997328282}
   - component: {fileID: -2600382248639402563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PrototypeHeroNew
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -174,6 +236,8 @@ Transform:
   - {fileID: 7234416123028626362}
   - {fileID: 2000575655945704494}
   - {fileID: 6602637651529097269}
+  - {fileID: 7599130454112813190}
+  - {fileID: 41028869}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -336,6 +400,13 @@ MonoBehaviour:
   m_WallJumpDust: {fileID: 7972526843131001964, guid: 2a6283ef7fbba594caf7888f051f4a2b, type: 3}
   m_AirSlamDust: {fileID: 2943720192077617830, guid: 27cb532070b8c2b4e97001c33cf37429, type: 3}
   m_ParryEffect: {fileID: 3569397387010719113, guid: 9300fb4b08a7c0f448a15475613f22d5, type: 3}
+  attackPoint: {fileID: 7599130454112813190}
+  attackPoint2: {fileID: 41028869}
+  attackRange: 0.53
+  attackRange2: 0.54
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &-1442058435570403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,7 +480,7 @@ GameObject:
   - component: {fileID: 3617823189154450194}
   - component: {fileID: 7246727038309344180}
   - component: {fileID: 1602386506773542423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallSensor_R1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +541,7 @@ GameObject:
   - component: {fileID: 2000575655945704494}
   - component: {fileID: 6083235009728169252}
   - component: {fileID: 9016615750983731624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallSensor_L1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +602,7 @@ GameObject:
   - component: {fileID: 6602637651529097269}
   - component: {fileID: 6044105343498134028}
   - component: {fileID: 1792506090958250915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallSensor_L2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
