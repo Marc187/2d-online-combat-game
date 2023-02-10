@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 41028869}
   m_Layer: 6
-  m_Name: Attackpoint2
+  m_Name: AttackLeft
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &41028869
 Transform:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7599130454112813190}
   m_Layer: 6
-  m_Name: Attackpoint
+  m_Name: AttackRight
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -260,6 +260,10 @@ MonoBehaviour:
   m_parryKnockbackForce: 4
   m_noBlood: 0
   m_hideSword: 0
+  maxHealth: 100
+  currentHealth: 0
+  attackRight: {fileID: 1860531561230240505}
+  attackLeft: {fileID: 41028868}
   m_maxSpeed: 10
 --- !u!50 &7853426713638563735
 Rigidbody2D:
@@ -400,10 +404,9 @@ MonoBehaviour:
   m_WallJumpDust: {fileID: 7972526843131001964, guid: 2a6283ef7fbba594caf7888f051f4a2b, type: 3}
   m_AirSlamDust: {fileID: 2943720192077617830, guid: 27cb532070b8c2b4e97001c33cf37429, type: 3}
   m_ParryEffect: {fileID: 3569397387010719113, guid: 9300fb4b08a7c0f448a15475613f22d5, type: 3}
-  attackPoint: {fileID: 7599130454112813190}
-  attackPoint2: {fileID: 41028869}
-  attackRange: 0.53
-  attackRange2: 0.54
+  attackRight: {fileID: 7599130454112813190}
+  attackLeft: {fileID: 41028869}
+  attackRange: 0.64
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64

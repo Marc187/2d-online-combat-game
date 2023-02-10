@@ -18,10 +18,9 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
     private PrototypeHero       m_player;
     private AudioManager_PrototypeHero m_audioManager;
 
-    public Transform attackPoint;
-    public Transform attackPoint2;
+    public Transform attackRight;
+    public Transform attackLeft;
     public float attackRange = 0.5f;
-    public float attackRange2 = 0.5f;
     public LayerMask enemyLayers;
 
     // Start is called before the first frame update
@@ -127,8 +126,8 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
     {
         m_audioManager.PlaySound("SwordAttack");
 
-        Collider2D[] hitEnemiesFromRight = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        Collider2D[] hitEnemiesFromLeft = Physics2D.OverlapCircleAll(attackPoint2.position, attackRange2, enemyLayers);
+        Collider2D[] hitEnemiesFromRight = Physics2D.OverlapCircleAll(attackRight.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemiesFromLeft = Physics2D.OverlapCircleAll(attackLeft.position, attackRange, enemyLayers);
 
         foreach (Collider2D enemy in hitEnemiesFromRight)
         {
@@ -144,13 +143,14 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        if (attackPoint == null)
+        if (attackRight == null)
             return;
 
-        if (attackPoint2 == null)
+        if (attackLeft == null)
             return;
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(attackRight.position, attackRange);
+        Gizmos.DrawWireSphere(attackLeft.position, attackRange);
     }
 
     void AE_SheathSword()

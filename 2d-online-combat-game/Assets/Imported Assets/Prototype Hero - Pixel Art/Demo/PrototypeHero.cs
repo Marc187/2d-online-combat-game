@@ -15,6 +15,9 @@ public class PrototypeHero : NetworkBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
+    public GameObject attackRight;
+    public GameObject attackLeft;
+
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private SpriteRenderer m_SR;
@@ -65,7 +68,7 @@ public class PrototypeHero : NetworkBehaviour
         currentHealth -= damage;
 
         // play hurt animation
-        // m_animator.SetTrigger("Hurt");
+        m_animator.SetTrigger("Hurt");
 
         if (currentHealth <= 0)
         {
@@ -74,7 +77,13 @@ public class PrototypeHero : NetworkBehaviour
     }
 
     void Die(){
-        Debug.Log("Hero died");
+        if(IsOwner) return;
+
+        m_animator.SetBool("noBlood", m_noBlood);
+        m_animator.SetTrigger("Death");
+        m_respawnTimer = 2.5f;
+        DisableWallSensors();
+        m_dead = true;
     }
 
     public override void OnNetworkSpawn()
@@ -146,6 +155,10 @@ public class PrototypeHero : NetworkBehaviour
             m_SR.flipX = false;
             m_facingDirection = 1;
             facingRight.Value = false;
+
+            attackLeft.SetActive(false);
+            attackRight.SetActive(true);
+
         }
 
         else if (inputRaw < 0 && !m_dodging && !m_wallSlide && !m_ledgeGrab && !m_ledgeClimb)
@@ -153,6 +166,10 @@ public class PrototypeHero : NetworkBehaviour
             m_SR.flipX = true;
             m_facingDirection = -1;
             facingRight.Value = true;
+            
+            attackLeft.SetActive(true);
+            attackRight.SetActive(false);
+
         }
 
         // SlowDownSpeed helps decelerate the characters when stopping
