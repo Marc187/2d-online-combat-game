@@ -12,7 +12,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {

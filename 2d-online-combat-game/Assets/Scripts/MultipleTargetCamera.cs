@@ -31,7 +31,7 @@ public class MultipleTargetCamera : MonoBehaviour
     void Zoom()
     {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / zoomLimiter);
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, newZoom, Time.deltaTime);
     }
 
     float GetGreatestDistance()
@@ -72,10 +72,9 @@ public class MultipleTargetCamera : MonoBehaviour
 
     public void UpdateTargetList()
     {
-        Debug.Log("Hello World");
         targets.Clear();
         GameObject[] newTargets = GameObject.FindGameObjectsWithTag("Player");
-        
+
         foreach (GameObject target in newTargets)
         {
             targets.Add(target.transform);
