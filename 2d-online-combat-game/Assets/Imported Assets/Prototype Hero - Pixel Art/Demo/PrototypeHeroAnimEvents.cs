@@ -127,17 +127,17 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
     {
         m_audioManager.PlaySound("SwordAttack");
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        Collider2D[] hitEnemies2 = Physics2D.OverlapCircleAll(attackPoint2.position, attackRange2, enemyLayers);
+        Collider2D[] hitEnemiesFromRight = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemiesFromLeft = Physics2D.OverlapCircleAll(attackPoint2.position, attackRange2, enemyLayers);
 
-        foreach (Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemiesFromRight)
         {
-            Debug.Log("We hit the enemy" + enemy.name);
+            enemy.GetComponentInParent<PrototypeHero>().TakeDamage(30);
         }
 
-        foreach (Collider2D enemy in hitEnemies2)
+        foreach (Collider2D enemy in hitEnemiesFromLeft)
         {
-            Debug.Log("We hit the enemy" + enemy.name);
+            enemy.GetComponentInParent<PrototypeHero>().TakeDamage(30);
         }
         
     }

@@ -12,6 +12,9 @@ public class PrototypeHero : NetworkBehaviour
     public bool m_noBlood = false;
     public bool m_hideSword = false;
 
+    public int maxHealth = 100;
+    public int currentHealth;
+
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private SpriteRenderer m_SR;
@@ -53,6 +56,25 @@ public class PrototypeHero : NetworkBehaviour
         m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_Prototype>();
         m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_Prototype>();
         m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_Prototype>();
+
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        // play hurt animation
+        // m_animator.SetTrigger("Hurt");
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die(){
+        Debug.Log("Hero died");
     }
 
     public override void OnNetworkSpawn()
