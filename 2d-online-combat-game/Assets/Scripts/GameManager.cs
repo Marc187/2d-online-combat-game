@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
         var cam = mainCamera.GetComponent<MultipleTargetCamera>();
         cam.UpdateTargetList();
 
-        // CHeck if users list is equal to 2
+        // Check if users list is equal to 2
         if (cam.targets.Count == 2)
         {
             timer.timerIsRunning = true;
