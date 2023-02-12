@@ -12,8 +12,8 @@ public class PrototypeHero : NetworkBehaviour
     public bool m_noBlood = false;
     public bool m_hideSword = false;
 
-    public int maxHealth = 100;
-    public int currentHealth;
+    public float maxHealth = 100;
+    public float currentHealth;
 
     public GameObject attackRight;
     public GameObject attackLeft;
@@ -45,27 +45,41 @@ public class PrototypeHero : NetworkBehaviour
     private float m_gravity;
     public float m_maxSpeed = 4.5f;
     private NetworkVariable<bool> facingRight = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private HealthBar healthBar;
 
     // Use this for initialization
     void Start()
     {
+        // Set components
         m_animator = GetComponentInChildren<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_SR = GetComponentInChildren<SpriteRenderer>();
         m_gravity = m_body2d.gravityScale;
 
+        // Get all sensors
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
         m_wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_Prototype>();
         m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_Prototype>();
         m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_Prototype>();
         m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_Prototype>();
 
+        // Set Health
         currentHealth = maxHealth;
+
+
+        // Declare healthbar
+        if (IsOwner)
+        {
+            healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+            healthBar.SetMaxHealth(maxHealth);
+        }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+
+        if (IsOwner) healthBar.SetHealth(currentHealth);
 
         // play hurt animation
         m_animator.SetTrigger("Hurt");
@@ -76,8 +90,9 @@ public class PrototypeHero : NetworkBehaviour
         }
     }
 
-    void Die(){
-        if(IsOwner) return;
+    void Die()
+    {
+        if (IsOwner) return;
 
         m_animator.SetBool("noBlood", m_noBlood);
         m_animator.SetTrigger("Death");
@@ -88,8 +103,10 @@ public class PrototypeHero : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        facingRight.OnValueChanged += (bool previousValue, bool newValue) => {
-            if (!IsOwner) {
+        facingRight.OnValueChanged += (bool previousValue, bool newValue) =>
+        {
+            if (!IsOwner)
+            {
                 Debug.Log("FLIP");
                 m_SR.flipX = newValue;
             }
@@ -166,7 +183,7 @@ public class PrototypeHero : NetworkBehaviour
             m_SR.flipX = true;
             m_facingDirection = -1;
             facingRight.Value = true;
-            
+
             attackLeft.SetActive(true);
             attackRight.SetActive(false);
 

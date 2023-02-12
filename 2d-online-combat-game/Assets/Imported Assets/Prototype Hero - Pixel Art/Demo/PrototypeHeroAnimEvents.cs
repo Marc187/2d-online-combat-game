@@ -23,6 +23,9 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
+    [SerializeField]
+    private float swordDamage = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -131,12 +134,12 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemiesFromRight)
         {
-            enemy.GetComponentInParent<PrototypeHero>().TakeDamage(30);
+            enemy.GetComponentInParent<PrototypeHero>().TakeDamage(swordDamage);
         }
 
         foreach (Collider2D enemy in hitEnemiesFromLeft)
         {
-            enemy.GetComponentInParent<PrototypeHero>().TakeDamage(30);
+            enemy.GetComponentInParent<PrototypeHero>().TakeDamage(swordDamage);
         }
         
     }
