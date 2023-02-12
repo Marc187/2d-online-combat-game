@@ -92,13 +92,35 @@ public class PrototypeHero : NetworkBehaviour
 
     void Die()
     {
-        if (IsOwner) return;
+        if (!IsOwner) return;
 
-        m_animator.SetBool("noBlood", m_noBlood);
         m_animator.SetTrigger("Death");
         m_respawnTimer = 2.5f;
         DisableWallSensors();
         m_dead = true;
+
+
+        // respawn when respawn timer is done
+        if (m_respawnTimer < 0.0f)
+        {
+            Respawn();
+        }
+    }
+
+    void Respawn()
+    {
+        if (!IsOwner) return;
+
+        m_dead = false;
+        m_body2d.velocity = Vector2.zero;
+        m_body2d.gravityScale = m_gravity;
+        transform.position = m_respawnPosition;
+        currentHealth = maxHealth;
+        if (IsOwner)
+        {
+            healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+            healthBar.SetMaxHealth(maxHealth);
+        }
     }
 
     public override void OnNetworkSpawn()
