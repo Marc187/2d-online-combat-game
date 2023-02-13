@@ -25,6 +25,7 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
 
     [SerializeField]
     private float swordDamage = 10f;
+    private bool isParrying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -136,16 +137,30 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
         foreach (Collider2D enemy in hitEnemiesFromRight)
         {
             PrototypeHero hero = enemy.GetComponent<PrototypeHero>();
-            if (hero) hero.TakeDamage(swordDamage);
-            hero.TakeDamage(swordDamage);
+            if (hero)
+            {
+                hero.TakeDamage(swordDamage);
+            }
+
         }
 
 
         foreach (Collider2D enemy in hitEnemiesFromLeft)
         {
             PrototypeHero hero = enemy.GetComponent<PrototypeHero>();
-            if (hero) hero.TakeDamage(swordDamage);
-            hero.TakeDamage(swordDamage);
+            PrototypeHeroAnimEvents heroAnim = enemy.GetComponent<PrototypeHeroAnimEvents>();
+
+            if (hero)
+            {
+                if (hero.IsParrying())
+                {
+                    hero.Parry();
+                }
+                else
+                {
+                    hero.TakeDamage(swordDamage);
+                }
+            }
         }
 
     }

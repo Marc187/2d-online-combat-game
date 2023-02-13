@@ -76,10 +76,9 @@ public class PrototypeHero : NetworkBehaviour
     }
 
     public void TakeDamage(float damage)
-    {   
+    {
 
         currentHealth -= damage;
-
         if (IsOwner) healthBar.SetHealth(currentHealth);
 
         // play hurt animation
@@ -301,19 +300,22 @@ public class PrototypeHero : NetworkBehaviour
         {
             // Parry
             // Used when you are in parry stance and something hits you
-            if (m_parryTimer > 0.0f)
-            {
-                m_animator.SetTrigger("Parry");
-                m_body2d.velocity = new Vector2(-m_facingDirection * m_parryKnockbackForce, m_body2d.velocity.y);
-            }
+            //if (m_parryTimer > 0.0f)
+            //{
+            //    m_animator.SetTrigger("Parry");
+            //    m_body2d.velocity = new Vector2(-m_facingDirection * m_parryKnockbackForce, m_body2d.velocity.y);
+            //}
 
             // Parry Stance
             // Ready to parry in case something hits you
-            else
-            {
-                m_animator.SetTrigger("ParryStance");
-                m_parryTimer = 7.0f / 12.0f;
-            }
+
+            //else
+            //{
+            //    m_animator.SetTrigger("ParryStance");
+            //    m_parryTimer = 7.0f / 12.0f;
+            //}
+
+            ParryStance();
         }
 
         //Up Attack
@@ -529,5 +531,26 @@ public class PrototypeHero : NetworkBehaviour
         transform.position = Vector3.zero;
         m_dead = false;
         m_animator.Rebind();
+    }
+
+    public bool IsParrying()
+    {
+        return m_parryTimer > 0.0f;
+    }
+    public void ParryStance()
+    {
+        if (m_parryTimer <= 0.0f)
+        {
+            m_animator.SetTrigger("ParryStance");
+            m_parryTimer = 7.0f / 12.0f;
+        }
+    }
+
+    public void Parry()
+    {
+
+        m_animator.SetTrigger("Parry");
+        m_body2d.velocity = new Vector2(-m_facingDirection * m_parryKnockbackForce, m_body2d.velocity.y);
+
     }
 }
