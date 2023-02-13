@@ -6,16 +6,16 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
 {
     // References to effect prefabs. These are set in the inspector
     [Header("Effects")]
-    public GameObject           m_RunStopDust;
-    public GameObject           m_JumpDust;
-    public GameObject           m_LandingDust;
-    public GameObject           m_DodgeDust;
-    public GameObject           m_WallSlideDust;
-    public GameObject           m_WallJumpDust;
-    public GameObject           m_AirSlamDust;
-    public GameObject           m_ParryEffect;
+    public GameObject m_RunStopDust;
+    public GameObject m_JumpDust;
+    public GameObject m_LandingDust;
+    public GameObject m_DodgeDust;
+    public GameObject m_WallSlideDust;
+    public GameObject m_WallJumpDust;
+    public GameObject m_AirSlamDust;
+    public GameObject m_ParryEffect;
 
-    private PrototypeHero       m_player;
+    private PrototypeHero m_player;
     private AudioManager_PrototypeHero m_audioManager;
 
     public Transform attackRight;
@@ -65,7 +65,7 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
     {
         m_audioManager.PlaySound("Jump");
 
-        if(!m_player.IsWallSliding())
+        if (!m_player.IsWallSliding())
         {
             float dustYOffset = 0.078125f;
             m_player.SpawnDustEffect(m_JumpDust, 0.0f, dustYOffset);
@@ -132,16 +132,22 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
         Collider2D[] hitEnemiesFromRight = Physics2D.OverlapCircleAll(attackRight.position, attackRange, enemyLayers);
         Collider2D[] hitEnemiesFromLeft = Physics2D.OverlapCircleAll(attackLeft.position, attackRange, enemyLayers);
 
+
         foreach (Collider2D enemy in hitEnemiesFromRight)
         {
-            enemy.GetComponentInParent<PrototypeHero>().TakeDamage(swordDamage);
+            PrototypeHero hero = enemy.GetComponent<PrototypeHero>();
+            if (hero) hero.TakeDamage(swordDamage);
+            hero.TakeDamage(swordDamage);
         }
+
 
         foreach (Collider2D enemy in hitEnemiesFromLeft)
         {
-            enemy.GetComponentInParent<PrototypeHero>().TakeDamage(swordDamage);
+            PrototypeHero hero = enemy.GetComponent<PrototypeHero>();
+            if (hero) hero.TakeDamage(swordDamage);
+            hero.TakeDamage(swordDamage);
         }
-        
+
     }
 
     void OnDrawGizmosSelected()
@@ -171,7 +177,7 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
     void AE_WallSlide()
     {
         //m_audioManager.GetComponent<AudioSource>().loop = true;
-        if(!m_audioManager.IsPlaying("WallSlide")) 
+        if (!m_audioManager.IsPlaying("WallSlide"))
             m_audioManager.PlaySound("WallSlide");
         float dustXOffset = 0.25f;
         float dustYOffset = 0.25f;

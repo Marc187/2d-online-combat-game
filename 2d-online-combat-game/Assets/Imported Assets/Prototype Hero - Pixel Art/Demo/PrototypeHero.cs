@@ -76,7 +76,8 @@ public class PrototypeHero : NetworkBehaviour
     }
 
     public void TakeDamage(float damage)
-    {
+    {   
+
         currentHealth -= damage;
 
         if (IsOwner) healthBar.SetHealth(currentHealth);
@@ -129,7 +130,6 @@ public class PrototypeHero : NetworkBehaviour
         {
             if (!IsOwner)
             {
-                Debug.Log("FLIP");
                 m_SR.flipX = newValue;
             }
         };
