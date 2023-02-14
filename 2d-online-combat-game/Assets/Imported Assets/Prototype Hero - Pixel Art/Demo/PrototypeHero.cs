@@ -549,17 +549,14 @@ public class PrototypeHero : NetworkBehaviour
 
     public void Parry()
     {
-
         m_animator.SetTrigger("Parry");
         m_body2d.velocity = new Vector2(-m_facingDirection * m_parryKnockbackForce, m_body2d.velocity.y);
-
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "VoidCollider")
+        if (collision.gameObject.name == "VoidCollider" && m_respawnTimer <= 0)
         {
-            Debug.Log("hello world");
             Die();
         }
     }
