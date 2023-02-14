@@ -95,7 +95,7 @@ public class PrototypeHero : NetworkBehaviour
         if (!IsOwner) return;
 
         m_animator.SetTrigger("Death");
-        m_respawnTimer = 2.5f;
+        m_respawnTimer = 3f;
         DisableWallSensors();
         m_dead = true;
 
@@ -157,6 +157,7 @@ public class PrototypeHero : NetworkBehaviour
 
         if (m_dead)
             return;
+
 
         //Check if character just landed on the ground
         if (!m_grounded && m_groundSensor.State())
@@ -552,5 +553,14 @@ public class PrototypeHero : NetworkBehaviour
         m_animator.SetTrigger("Parry");
         m_body2d.velocity = new Vector2(-m_facingDirection * m_parryKnockbackForce, m_body2d.velocity.y);
 
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "VoidCollider")
+        {
+            Debug.Log("hello world");
+            Die();
+        }
     }
 }
