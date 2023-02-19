@@ -47,6 +47,9 @@ public class PrototypeHero : NetworkBehaviour
     private NetworkVariable<bool> facingRight = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private HealthBar healthBar;
 
+    [SerializeField]
+    private int lives = 3;
+
     // Use this for initialization
     void Start()
     {
@@ -99,6 +102,7 @@ public class PrototypeHero : NetworkBehaviour
         DisableWallSensors();
         m_dead = true;
 
+        lives -= 1;
 
         // respawn when respawn timer is done
         if (m_respawnTimer < 0.0f)
