@@ -137,9 +137,19 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
         foreach (Collider2D enemy in hitEnemiesFromRight)
         {
             PrototypeHero hero = enemy.GetComponent<PrototypeHero>();
+            PrototypeHeroAnimEvents heroAnim = enemy.GetComponent<PrototypeHeroAnimEvents>();
+
             if (hero)
             {
-                hero.TakeDamage(swordDamage);
+                if (hero.ParryStanceIsActive())
+                {
+                    Debug.Log("PARRY");
+                    hero.Parry();
+                }
+                else
+                {
+                    hero.TakeDamage(swordDamage);
+                }
             }
 
         }
@@ -152,8 +162,9 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
 
             if (hero)
             {
-                if (hero.IsParrying())
+                if (hero.ParryStanceIsActive())
                 {
+                    Debug.Log("PARRY");
                     hero.Parry();
                 }
                 else

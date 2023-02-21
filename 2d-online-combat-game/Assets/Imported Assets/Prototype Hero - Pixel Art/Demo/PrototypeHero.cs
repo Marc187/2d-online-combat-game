@@ -460,7 +460,7 @@ public class PrototypeHero : NetworkBehaviour
             m_crouching = false;
             m_animator.SetBool("Crouching", false);
         }
-        //Walk
+        //
         else if (m_moving && Input.GetKey(KeyCode.LeftControl))
         {
             m_animator.SetInteger("AnimState", 2);
@@ -555,10 +555,11 @@ public class PrototypeHero : NetworkBehaviour
 
     }
 
-    public bool IsParrying()
+    public bool ParryStanceIsActive()
     {
         return m_parryTimer > 0.0f;
     }
+
     public void ParryStance()
     {
         if (m_parryTimer <= 0.0f)
