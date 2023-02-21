@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
     }
 
+    public void GameOver() {
+        
+    }
+
     #region Network events
 
     private void ClientConnected(ulong id)

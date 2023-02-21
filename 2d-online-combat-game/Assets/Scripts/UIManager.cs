@@ -10,24 +10,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text stateText;
     [SerializeField] private List<GameObject> objectsToEnable;
     [SerializeField] private List<GameObject> objectsToDisable;
-
+    public GameObject victoryScreen;
+    public GameObject defeatScreen;
     private void Start()
     {
         // Subscribe to events
         GameManager.Instance.MatchFound += MatchFound;
         GameManager.Instance.UpdateState += UpdateState;
 
-        // Disables all objects in the list
-        foreach (GameObject o in objectsToDisable)
-        {
-            o.SetActive(true);
-        }
+        DisableObjects();
+        EnableObjects();
 
-        // Enables all objects in the list
-        foreach (GameObject o in objectsToEnable)
-        {
-            o.SetActive(false);
-        }
     }
 
     private void UpdateState(string newState)
@@ -48,6 +41,30 @@ public class UIManager : MonoBehaviour
         {
             o.SetActive(true);
         }
+    }
+
+    public void EnableObjects()
+    {
+        // Enables all objects in the list
+        foreach (GameObject o in objectsToEnable)
+        {
+            o.SetActive(false);
+        }
+    }
+
+    public void DisableObjects()
+    {
+        // Disables all objects in the list
+        foreach (GameObject o in objectsToDisable)
+        {
+            o.SetActive(true);
+        }
+
+    }
+
+    public void DisplayEndScreen()
+    {
+        
     }
 
     private void OnDestroy()

@@ -104,8 +104,11 @@ public class PrototypeHero : NetworkBehaviour
 
         lives -= 1;
 
+        if (lives <= 0) {
+            GameManager.Instance.GameOver();
+        }
         // respawn when respawn timer is done
-        if (m_respawnTimer < 0.0f)
+        else if (m_respawnTimer < 0.0f)
         {
             Respawn();
         }
