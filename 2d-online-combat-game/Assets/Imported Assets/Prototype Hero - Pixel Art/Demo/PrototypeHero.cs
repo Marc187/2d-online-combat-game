@@ -47,6 +47,7 @@ public class PrototypeHero : NetworkBehaviour
     public float m_maxSpeed = 4.5f;
     private NetworkVariable<bool> facingRight = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private HealthBar healthBar;
+    private Transform spawnPoint;
 
     [SerializeField]
     private int lives = 3;
@@ -54,6 +55,19 @@ public class PrototypeHero : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
+        // Give Spawn Point to Hero
+        GameObject gameManager = GameObject.Find("GameManager");
+        SpawnPoints spawnPoints = gameManager.GetComponent<SpawnPoints>();
+
+        if (spawnPoints.spawnPoints.Count > 0)
+        {
+            spawnPoint = spawnPoints.spawnPoints[0];
+            spawnPoints.spawnPoints.RemoveAt(0);
+        } 
+
+        transform.position = spawnPoint.position;
+
+
         // Set components
         m_animator = GetComponentInChildren<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
@@ -539,14 +553,14 @@ public class PrototypeHero : NetworkBehaviour
 
     void RespawnHero()
     {
-        transform.position = Vector3.zero;
+        transform.position = spawnPoint.position;
         m_dead = false;
         m_animator.Rebind();
 
 
         m_body2d.velocity = Vector2.zero;
         m_body2d.gravityScale = m_gravity;
-        transform.position = m_respawnPosition;
+
         
         // Reset Health
         currentHealth = maxHealth;
@@ -571,6 +585,7 @@ public class PrototypeHero : NetworkBehaviour
 
     public void Parry()
     {
+
         m_animator.SetTrigger("Parry");
         m_body2d.velocity = new Vector2(-m_facingDirection * m_parryKnockbackForce, m_body2d.velocity.y);
     }

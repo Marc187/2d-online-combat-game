@@ -143,7 +143,6 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
             {
                 if (hero.ParryStanceIsActive())
                 {
-                    Debug.Log("PARRY");
                     hero.Parry();
                 }
                 else
@@ -164,7 +163,6 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
             {
                 if (hero.ParryStanceIsActive())
                 {
-                    Debug.Log("PARRY");
                     hero.Parry();
                 }
                 else
