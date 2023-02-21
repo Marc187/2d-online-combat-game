@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Unity.Netcode;
 public class PrototypeHero : NetworkBehaviour
@@ -95,7 +96,7 @@ public class PrototypeHero : NetworkBehaviour
 
     void Die()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
 
         m_animator.SetTrigger("Death");
         m_respawnTimer = 3f;
@@ -107,27 +108,29 @@ public class PrototypeHero : NetworkBehaviour
         if (lives <= 0) {
             GameManager.Instance.GameOver();
         }
+
+
         // respawn when respawn timer is done
         else if (m_respawnTimer < 0.0f)
         {
-            Respawn();
+            RespawnHero();
         }
     }
 
     void Respawn()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
 
         m_dead = false;
         m_body2d.velocity = Vector2.zero;
         m_body2d.gravityScale = m_gravity;
         transform.position = m_respawnPosition;
+
+        // Reset Health
         currentHealth = maxHealth;
-        if (IsOwner)
-        {
-            healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
-            healthBar.SetMaxHealth(maxHealth);
-        }
+        healthBar.SetMaxHealth(maxHealth);
+        Debug.Log(currentHealth);
+        
     }
 
     public override void OnNetworkSpawn()
@@ -539,6 +542,17 @@ public class PrototypeHero : NetworkBehaviour
         transform.position = Vector3.zero;
         m_dead = false;
         m_animator.Rebind();
+
+
+        m_body2d.velocity = Vector2.zero;
+        m_body2d.gravityScale = m_gravity;
+        transform.position = m_respawnPosition;
+        
+        // Reset Health
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        Debug.Log(currentHealth);
+
     }
 
     public bool IsParrying()
