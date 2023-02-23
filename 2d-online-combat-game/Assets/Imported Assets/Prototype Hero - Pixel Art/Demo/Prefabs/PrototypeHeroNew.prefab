@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_runSpeed: 10
   m_walkSpeed: 5
-  m_jumpForce: 15
+  m_jumpForce: 18
   m_dodgeForce: 8
   m_parryKnockbackForce: 4
   m_noBlood: 0
@@ -265,6 +265,7 @@ MonoBehaviour:
   attackRight: {fileID: 1860531561230240505}
   attackLeft: {fileID: 41028868}
   m_maxSpeed: 10
+  lives: 3
 --- !u!50 &7853426713638563735
 Rigidbody2D:
   serializedVersion: 4
@@ -410,6 +411,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  swordDamage: 10
 --- !u!114 &-1442058435570403
 MonoBehaviour:
   m_ObjectHideFlags: 0
