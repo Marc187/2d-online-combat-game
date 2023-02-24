@@ -20,11 +20,13 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
 
     public Transform attackRight;
     public Transform attackLeft;
+    public Transform attackLanding;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
     [SerializeField]
     private float swordDamage = 10f;
+    private float landingAttackDamage = 25f;
     private bool isParrying = false;
 
     // Start is called before the first frame update
@@ -114,6 +116,20 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
         float dustYOffset = 0.078125f;
         m_player.SpawnDustEffect(m_AirSlamDust, 0.0f, dustYOffset);
         m_player.DisableMovement(0.5f);
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackLanding.position, attackRange, enemyLayers);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            PrototypeHero hero = enemy.GetComponent<PrototypeHero>();
+            PrototypeHeroAnimEvents heroAnim = enemy.GetComponent<PrototypeHeroAnimEvents>();
+
+            if (hero)
+            {
+                hero.TakeDamage(landingAttackDamage);
+            }
+        }
+
     }
 
     void AE_Hurt()
@@ -182,6 +198,10 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
         if (attackLeft == null)
             return;
 
+        if(attackLanding == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackLanding.position, attackRange);
         Gizmos.DrawWireSphere(attackRight.position, attackRange);
         Gizmos.DrawWireSphere(attackLeft.position, attackRange);
     }
