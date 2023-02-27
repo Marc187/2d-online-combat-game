@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine;
 using System.Collections;
 using Unity.Netcode;
 public class PrototypeHero : NetworkBehaviour
@@ -46,6 +45,7 @@ public class PrototypeHero : NetworkBehaviour
     private float m_gravity;
     public float m_maxSpeed = 4.5f;
     private NetworkVariable<bool> facingRight = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<bool> gameOver = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private HealthBar healthBar;
     private Transform spawnPoint;
 
@@ -63,7 +63,7 @@ public class PrototypeHero : NetworkBehaviour
         {
             spawnPoint = spawnPoints.spawnPoints[0];
             spawnPoints.spawnPoints.RemoveAt(0);
-        } 
+        }
 
         transform.position = spawnPoint.position;
 
@@ -119,8 +119,9 @@ public class PrototypeHero : NetworkBehaviour
 
         lives -= 1;
 
-        if (lives <= 0) {
-            GameManager.Instance.GameOver();
+        if (lives <= 0)
+        {
+            gameOver.Value = true;
         }
 
 
@@ -144,7 +145,7 @@ public class PrototypeHero : NetworkBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         Debug.Log(currentHealth);
-        
+
     }
 
     public override void OnNetworkSpawn()
@@ -155,6 +156,14 @@ public class PrototypeHero : NetworkBehaviour
             {
                 m_SR.flipX = newValue;
             }
+        };
+
+        gameOver.OnValueChanged += (bool previousValue, bool newValue) =>
+        {
+            GameObject gameManager = GameObject.Find("GameManager");
+            GameManager gmScript = gameManager.GetComponent<GameManager>();
+
+            gmScript.GameOver(lives >= 1);
         };
     }
 
@@ -561,7 +570,7 @@ public class PrototypeHero : NetworkBehaviour
         m_body2d.velocity = Vector2.zero;
         m_body2d.gravityScale = m_gravity;
 
-        
+
         // Reset Health
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);

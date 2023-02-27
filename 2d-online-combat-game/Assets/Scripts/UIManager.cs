@@ -62,9 +62,16 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void DisplayEndScreen()
+    public void DisplayEndScreen(bool win)
     {
-        
+        if (win) 
+        {
+            victoryScreen.SetActive(true);
+        }
+        else 
+        {
+            defeatScreen.SetActive(true);
+        }
     }
 
     private void OnDestroy()

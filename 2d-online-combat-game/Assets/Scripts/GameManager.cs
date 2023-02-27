@@ -63,8 +63,19 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
     }
 
-    public void GameOver() {
-        
+    public void GameOver(bool win)
+    {
+        GameObject uiManager = GameObject.Find("UIManager");
+        UIManager ui = uiManager.GetComponent<UIManager>();
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject player in players)
+        {
+            player.SetActive(false);
+        }
+
+        ui.DisplayEndScreen(win);
     }
 
     #region Network events
