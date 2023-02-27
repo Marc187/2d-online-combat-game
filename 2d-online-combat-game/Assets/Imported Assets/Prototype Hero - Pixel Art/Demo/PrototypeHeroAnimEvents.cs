@@ -124,8 +124,9 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
             PrototypeHero hero = enemy.GetComponent<PrototypeHero>();
             PrototypeHeroAnimEvents heroAnim = enemy.GetComponent<PrototypeHeroAnimEvents>();
 
-            if (hero)
+            if (hero && !hero.IsOwner)
             {
+
                 hero.TakeDamage(landingAttackDamage);
             }
         }
